@@ -1,0 +1,3 @@
+require: tsx/esm
+file: 'test/setup.ts'
+spec: 'test/**/*.test.ts'

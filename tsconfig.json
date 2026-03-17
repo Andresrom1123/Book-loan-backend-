@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "NodeNext",
+    "moduleResolution": "nodenext",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "removeComments": true,
+    "strictNullChecks": true,
+    "outDir": "dist"
+  },
+  "exclude": ["node_modules", "dist"],
+  "lib": ["es2022"]
+}
