@@ -6,7 +6,8 @@ import type { Application } from 'express';
 import Configuration from './Configuration.js';
 import Database from './core/database/Database.js';
 import errorHandler from './api/middlewares/errorHandler.js';
-import ErrorReporter from './lib/errorReporter/ErrorReporter.js';
+import type {ErrorReporter} from './lib/errorReporter/ErrorReporter.js';
+import inventoryRouter from './api/routes/inventoryRouter.js';
 
 class BookLoan {
   protected app: Application;
@@ -55,7 +56,7 @@ class BookLoan {
   }
 
   private initializeRoutes(): void {
-    //
+    this.app.use('/api/v1/inventories', inventoryRouter);
   }
 
   private initializeErrorHandler(): void {
