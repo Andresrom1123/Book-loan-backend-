@@ -6,7 +6,7 @@ import type { Database } from '../../core/database/index.js';
 
 import AbstractRepository from './AbstracRepository.js';
 
-import { NotFound } from './errors/index.js';
+import { NotFound } from '../../core/database/errors/index.js';
 
 class MemoryTokensRepository extends AbstractRepository implements TokensRepository {
   private tokens = new Map<string, Token>();

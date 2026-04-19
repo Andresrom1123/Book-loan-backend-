@@ -1,6 +1,5 @@
 import type { NextFunction, Request, Response } from 'express';
 
-import ErrorReporter from '../../lib/errorReporter/ErrorReporter.js';
 import {
   APIError,
   BadRequest,
@@ -11,6 +10,8 @@ import {
   Unauthorized,
   UnsupportedMediaType
 } from '../errors/index.js';
+
+import type { ErrorReporter } from '../../lib/errorReporter/ErrorReporter.js';
 
 type ErrorWithStatus = Error & { status: number };
 
