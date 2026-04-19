@@ -6,13 +6,16 @@ import type { Application } from 'express';
 import Configuration from './Configuration.js';
 import Database from './core/database/Database.js';
 import errorHandler from './api/middlewares/errorHandler.js';
-import ErrorReporter from './lib/errorReporter/ErrorReporter.js';
+import SimpleTokenGenerator from './lib/token/SimpleTokenGenerator.js';
+
+import usersAPI from './api/users/index.js';
+
+import type { ErrorReporter } from './lib/errorReporter/ErrorReporter.js';
 
 class BookLoan {
   protected app: Application;
 
   private config: Configuration;
-  private database: Database;
 
   constructor(
     config: Configuration,
@@ -20,12 +23,14 @@ class BookLoan {
     errorReporter: ErrorReporter
   ) {
     this.config = config;
-    this.database = database;
 
     this.app = express();
 
+    const simpleTokenGenerator = new SimpleTokenGenerator(32);
+
     this.app.set('database', database);
     this.app.set('errorReporter', errorReporter);
+    this.app.set('tokenGenerator', simpleTokenGenerator);
 
     this.initializeLogs();
     this.initializeMiddlewares();
@@ -42,11 +47,13 @@ class BookLoan {
     const host = this.config.getHost();
 
     return new Promise((resolve, reject) => {
-      this.app.listen(port, host, (error: Error) => error ? reject(error) : resolve());
+      const server = this.app.listen(port, host, () => resolve());
+
+      server.on('error', reject);
     });
   }
 
-  private initializeLogs(): void {
+  protected initializeLogs(): void {
     this.app.use(morgan('dev'));
   }
 
@@ -55,7 +62,7 @@ class BookLoan {
   }
 
   private initializeRoutes(): void {
-    //
+    this.app.use('/api/v1/users', usersAPI);
   }
 
   private initializeErrorHandler(): void {
