@@ -1,6 +1,6 @@
 import type { NextFunction, Request, Response } from 'express';
 
-import ErrorReporter from '../../lib/errorReporter/ErrorReporter.js';
+import type {ErrorReporter} from '../../lib/errorReporter/ErrorReporter.js';
 import {
   APIError,
   BadRequest,

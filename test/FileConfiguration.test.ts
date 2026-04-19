@@ -1,6 +1,7 @@
 import fs from 'node:fs/promises';
 
-import sinon, { SinonSandbox } from 'sinon';
+import sinon from 'sinon';
+import type { SinonSandbox } from 'sinon';
 import { expect } from 'chai';
 
 import FileConfiguration, {
