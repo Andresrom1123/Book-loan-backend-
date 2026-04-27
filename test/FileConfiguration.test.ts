@@ -1,6 +1,6 @@
 import fs from 'node:fs/promises';
 
-import sinon, { SinonSandbox } from 'sinon';
+import sinon from 'sinon';
 import { expect } from 'chai';
 
 import FileConfiguration, {
@@ -14,7 +14,7 @@ function buildFixtureName(name: string) {
 }
 
 describe('#FileConfiguration', () => {
-  let sandbox: SinonSandbox;
+  let sandbox: ReturnType<typeof sinon.createSandbox>;
 
   beforeEach(() => sandbox = sinon.createSandbox());
 
