@@ -8,6 +8,7 @@ interface CreateUserData {
 
 interface UsersRepository {
   create(data: CreateUserData): Promise<User>;
+  findByEmail(email: string): Promise<User>;
   findById(id: string): Promise<User>;
 }
 
